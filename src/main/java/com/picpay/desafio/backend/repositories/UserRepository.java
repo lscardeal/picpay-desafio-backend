@@ -1,4 +1,4 @@
-package com.picpay.desafio.backend.repository;
+package com.picpay.desafio.backend.repositories;
 
 import java.util.Optional;
 
