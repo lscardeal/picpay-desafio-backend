@@ -2,9 +2,12 @@ package com.picpay.desafio.backend.services.validators;
 
 import java.math.BigDecimal;
 
+import org.springframework.stereotype.Service;
+
 import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
 import com.picpay.desafio.backend.exceptions.OutOfBalanceException;
 
+@Service
 public class TransactionValueValidator {
     
     public void validate(Transaction transaction) {

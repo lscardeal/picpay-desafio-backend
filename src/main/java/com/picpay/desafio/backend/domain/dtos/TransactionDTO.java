@@ -1,4 +1,4 @@
-package com.picpay.desafio.backend.domain.models;
+package com.picpay.desafio.backend.domain.dtos;
 
 import java.math.BigDecimal;
 
@@ -12,7 +12,7 @@ import lombok.Data;
 @Builder
 @JsonSerialize
 @JsonDeserialize
-public class TransactionModel {
+public class TransactionDTO {
     
     private String sender;
 

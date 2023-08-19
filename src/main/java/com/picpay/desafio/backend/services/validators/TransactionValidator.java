@@ -1,9 +1,11 @@
 package com.picpay.desafio.backend.services.validators;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
 
+@Service
 public class TransactionValidator {
 
     @Autowired
