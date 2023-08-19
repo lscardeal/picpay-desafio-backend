@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.picpay.desafio.backend.domain.dtos.TransactionDTO;
 import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
 import com.picpay.desafio.backend.domain.entity.user.User;
+import com.picpay.desafio.backend.domain.entity.user.UserAccount;
 import com.picpay.desafio.backend.domain.values.TransactionAuthorization;
 import com.picpay.desafio.backend.exceptions.TransactionDeniedException;
 import com.picpay.desafio.backend.external.gateways.TransactionAuthorizerGateway;
@@ -25,9 +26,6 @@ public class TransactionService {
     private TransactionRepository transactionRepository;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private UserAccountService userAccountService;
 
     @Autowired
@@ -36,7 +34,7 @@ public class TransactionService {
     @Autowired
     private TransactionNotifierGateway notifierGateway;
 
-    public Transaction createTransaction(TransactionDTO transactionDTO) {
+    public Transaction createTransaction(final TransactionDTO transactionDTO) {
         Transaction transaction = this.assembleTransaction(transactionDTO);
         this.transactionValidator.validate(transaction);
 
@@ -56,13 +54,13 @@ public class TransactionService {
             throw new TransactionDeniedException();
     }
 
-    private Transaction assembleTransaction(TransactionDTO transactionDTO) {
-        User sender = userService.getUserById(transactionDTO.senderId());
-        User receiver = userService.getUserById(transactionDTO.receiverId());;
+    private Transaction assembleTransaction(final TransactionDTO transactionDTO) {
+        UserAccount sender = userAccountService.getUserAccountById(transactionDTO.senderId());
+        UserAccount receiver = userAccountService.getUserAccountById(transactionDTO.receiverId());;
 
         return Transaction.builder()
-                        .senderAccount(sender.getUserAccount())
-                        .receiverAccount(receiver.getUserAccount())
+                        .senderAccount(sender)
+                        .receiverAccount(receiver)
                         .value(transactionDTO.value())
                         .timestamp(LocalDateTime.now())
                         .build();

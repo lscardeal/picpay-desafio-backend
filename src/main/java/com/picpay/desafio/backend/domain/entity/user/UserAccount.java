@@ -13,12 +13,16 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "USER_ACCOUNT")
-@Data
+@Getter
+@Setter
+@Builder
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class UserAccount {
