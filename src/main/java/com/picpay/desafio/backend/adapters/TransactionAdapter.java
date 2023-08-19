@@ -12,15 +12,15 @@ import com.picpay.desafio.backend.services.UserService;
 @Component
 public class TransactionAdapter {
     
-    public Transaction fromDTOToEntity(TransactionDTO transactionModel, UserService userService) {
-        
-            User sender = userService.getUserById(transactionModel.getSender());
-            User receiver = userService.getUserById(transactionModel.getReceiver());;
+    public Transaction fromDTOToEntity(TransactionDTO transactionDTO, UserService userService) {
+
+            User sender = userService.getUserById(transactionDTO.senderId());
+            User receiver = userService.getUserById(transactionDTO.receiverId());;
 
             return Transaction.builder()
                             .senderAccount(sender.getUserAccount())
                             .receiverAccount(receiver.getUserAccount())
-                            .value(transactionModel.getValue())
+                            .value(transactionDTO.value())
                             .timestamp(LocalDateTime.now())
                             .build();
     }
