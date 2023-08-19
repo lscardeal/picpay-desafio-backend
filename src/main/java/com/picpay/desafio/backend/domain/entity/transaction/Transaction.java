@@ -12,12 +12,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Entity
 @Table(name = "TRANSACTIONS")
-@Data
+@Getter
+@Builder
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Transaction {
@@ -28,11 +31,11 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "sender_id")
-    private UserAccount sender;
+    private UserAccount senderAccount;
 
     @ManyToOne
     @JoinColumn(name = "receiver_id")
-    private UserAccount receiver;
+    private UserAccount receiverAccount;
 
     private BigDecimal value;
 
