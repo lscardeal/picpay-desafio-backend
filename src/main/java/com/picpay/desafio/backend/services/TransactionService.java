@@ -22,17 +22,16 @@ public class TransactionService {
     private TransactionValidator transactionValidator;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private TransactionRepository transactionRepository;
 
     @Autowired
     private TransactionAdapter transactionAdapter;
 
+    @Autowired
+    private UserService userService;
 
-    public void execute(TransactionModel transactionModel) {
-        Transaction transaction = this.transactionAdapter.fromModelToEntity(transactionModel, userRepository);
+    public void createTransaction(TransactionModel transactionModel) {
+        Transaction transaction = this.transactionAdapter.fromModelToEntity(transactionModel, userService);
         this.transactionValidator.validate(transaction);
         transactionRepository.save(transaction);
     }

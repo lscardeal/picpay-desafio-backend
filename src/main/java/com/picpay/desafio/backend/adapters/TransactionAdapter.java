@@ -5,20 +5,19 @@ import java.time.LocalDateTime;
 import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
 import com.picpay.desafio.backend.domain.entity.user.User;
 import com.picpay.desafio.backend.domain.models.TransactionModel;
-import com.picpay.desafio.backend.repositories.UserRepository;
-import com.picpay.desafio.backend.services.utils.UserUtil;
+import com.picpay.desafio.backend.services.UserService;
 
 public class TransactionAdapter {
     
-    public Transaction fromModelToEntity(TransactionModel model, UserRepository userRepository) {
+    public Transaction fromModelToEntity(TransactionModel transactionModel, UserService userService) {
         
-            User sender = UserUtil.getUserById(model.getSender(), userRepository);
-            User receiver = UserUtil.getUserById(model.getReceiver(), userRepository);
+            User sender = userService.getUserById(transactionModel.getSender());
+            User receiver = userService.getUserById(transactionModel.getReceiver());;
 
             return Transaction.builder()
                             .senderAccount(sender.getUserAccount())
                             .receiverAccount(receiver.getUserAccount())
-                            .value(model.getValue())
+                            .value(transactionModel.getValue())
                             .timestamp(LocalDateTime.now())
                             .build();
     }
