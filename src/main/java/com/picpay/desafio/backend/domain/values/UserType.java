@@ -1,4 +1,4 @@
-package com.picpay.desafio.backend.domain.entity.user;
+package com.picpay.desafio.backend.domain.values;
 
 public enum UserType {
 

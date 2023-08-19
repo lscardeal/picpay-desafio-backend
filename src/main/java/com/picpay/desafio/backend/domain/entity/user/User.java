@@ -1,5 +1,7 @@
 package com.picpay.desafio.backend.domain.entity.user;
 
+import com.picpay.desafio.backend.domain.values.UserType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
