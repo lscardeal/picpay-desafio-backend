@@ -16,7 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.picpay.desafio.backend.domain.dtos.UserDTO;
+import com.picpay.desafio.backend.domain.dtos.user.UserDTO;
 import com.picpay.desafio.backend.domain.entity.user.User;
 import com.picpay.desafio.backend.domain.entity.user.UserAccount;
 import com.picpay.desafio.backend.domain.values.UserType;

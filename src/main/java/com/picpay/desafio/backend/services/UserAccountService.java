@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
+import com.picpay.desafio.backend.domain.entity.transaction.Transference;
 import com.picpay.desafio.backend.domain.entity.user.User;
 import com.picpay.desafio.backend.domain.entity.user.UserAccount;
 import com.picpay.desafio.backend.exceptions.UserAccountNotFoundException;
@@ -17,22 +17,22 @@ public class UserAccountService {
     @Autowired
     private UserAccountRepository userAccountRepository;
 
-    public void updateTransactionUserAccounts(final Transaction transaction) {
-        this.updateSenderAccount(transaction);
-        this.updateReceiverAccount(transaction);
+    public void updateTransference(final Transference transference) {
+        this.updateSenderAccount(transference);
+        this.updateReceiverAccount(transference);
     }
 
-    private void updateSenderAccount(final Transaction transaction) {
-        UserAccount senderAccount = transaction.getSenderAccount();
-        senderAccount.getTransactions().add(transaction);
-        senderAccount.setBalance(senderAccount.getBalance().subtract(transaction.getValue()));
+    private void updateSenderAccount(final Transference transference) {
+        UserAccount senderAccount = transference.getSenderAccount();
+        senderAccount.getTransferencesSended().add(transference);
+        senderAccount.setBalance(senderAccount.getBalance().subtract(transference.getValue()));
         userAccountRepository.save(senderAccount);
     }
 
-    private void updateReceiverAccount(final Transaction transaction) {
-        UserAccount receiverAccount = transaction.getReceiverAccount();
-        receiverAccount.getTransactions().add(transaction);
-        receiverAccount.setBalance(receiverAccount.getBalance().add(transaction.getValue()));
+    private void updateReceiverAccount(final Transference transference) {
+        UserAccount receiverAccount = transference.getReceiverAccount();
+        receiverAccount.getTransferencesReceived().add(transference);
+        receiverAccount.setBalance(receiverAccount.getBalance().add(transference.getValue()));
         userAccountRepository.save(receiverAccount);
     }
 

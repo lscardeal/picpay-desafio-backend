@@ -1,6 +1,6 @@
 package com.picpay.desafio.backend.services.validators;
 
-import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
+import com.picpay.desafio.backend.domain.entity.transaction.Transference;
 import com.picpay.desafio.backend.domain.entity.user.User;
 import com.picpay.desafio.backend.domain.entity.user.UserAccount;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,16 +11,16 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-public class TransactionValidatorTest {
+public class TransferenceValidatorTest {
 
     @Mock
-    private TransactionValueValidator transactionValueValidator;
+    private TransferenceValueValidator transferenceValueValidator;
 
     @Mock
     private SenderUserTypeValidator senderUserTypeValidator;
 
     @InjectMocks
-    private TransactionValidator transactionValidator;
+    private TransferenceValidator transferenceValidator;
 
     @BeforeEach
     void setup() {
@@ -29,15 +29,15 @@ public class TransactionValidatorTest {
 
     @Test
     void testValidate() {
-        Transaction transaction = new Transaction();
+        Transference transference = new Transference();
         UserAccount userAccount = new UserAccount();
         User user = new User();
 
         userAccount.setUser(user);
-        transaction.setSenderAccount(userAccount);
+        transference.setSenderAccount(userAccount);
 
-        transactionValidator.validate(transaction);
-        verify(transactionValueValidator).validate(transaction);
-        verify(senderUserTypeValidator).validate(transaction.getSenderAccount().getUser());
+        transferenceValidator.validate(transference);
+        verify(transferenceValueValidator).validate(transference);
+        verify(senderUserTypeValidator).validate(transference.getSenderAccount().getUser());
     }
 }

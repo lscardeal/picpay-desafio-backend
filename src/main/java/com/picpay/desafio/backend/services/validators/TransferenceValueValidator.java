@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
 
-import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
+import com.picpay.desafio.backend.domain.entity.transaction.Transference;
 import com.picpay.desafio.backend.exceptions.OutOfBalanceException;
 
 @Service
-public class TransactionValueValidator {
+public class TransferenceValueValidator {
     
-    public void validate(Transaction transaction) {
-        this.validate(transaction.getSenderAccount().getBalance(), transaction.getValue());
+    public void validate(Transference transference) {
+        this.validate(transference.getSenderAccount().getBalance(), transference.getValue());
     }
 
     public void validate(BigDecimal balance, BigDecimal value) throws OutOfBalanceException {

@@ -1,6 +1,6 @@
 package com.picpay.desafio.backend.domain.values;
 
-public enum TransactionAuthorization {
+public enum TransferenceAuthorization {
 
     AUTHORIZED, DENIED;
 

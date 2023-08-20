@@ -18,32 +18,32 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "TRANSACTIONS")
+@Table(name = "TRANSFERENCE")
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Transaction {
+public class Transference {
     
     @Id
     @GeneratedValue
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "sender_id", nullable = false)
+    @JoinColumn(name = "SENDER_ID", nullable = false)
     private UserAccount senderAccount;
 
     @ManyToOne
-    @JoinColumn(name = "receiver_id", nullable = false)
+    @JoinColumn(name = "RECEIVER_ID", nullable = false)
     private UserAccount receiverAccount;
 
-    @Column(name = "TRANSACTION_VALUE", nullable = false)
+    @Column(name = "TRANSFERENCE_VALUE", nullable = false)
     private BigDecimal value;
 
     @Column(nullable = false)
     private LocalDateTime timestamp;
 
-    public Transaction(UserAccount senderAccount, UserAccount receiverAccount, BigDecimal value) {
+    public Transference(UserAccount senderAccount, UserAccount receiverAccount, BigDecimal value) {
         this.senderAccount = senderAccount;
         this.receiverAccount = receiverAccount;
         this.value = value;

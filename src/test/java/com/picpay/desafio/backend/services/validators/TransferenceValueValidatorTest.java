@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import com.picpay.desafio.backend.exceptions.OutOfBalanceException;
 
-public class TransactionValueValidatorTest {
+public class TransferenceValueValidatorTest {
 
     @Test
     void validateBalanceGreaterThanValue() {
-        TransactionValueValidator validator = new TransactionValueValidator();
+        TransferenceValueValidator validator = new TransferenceValueValidator();
         BigDecimal balance = BigDecimal.TEN;
         BigDecimal value = BigDecimal.ONE;
         validator.validate(balance,value);
@@ -20,7 +20,7 @@ public class TransactionValueValidatorTest {
 
     @Test
     void validateBalanceEqualsValue() {
-        TransactionValueValidator validator = new TransactionValueValidator();
+        TransferenceValueValidator validator = new TransferenceValueValidator();
         BigDecimal balance = BigDecimal.TEN;
         BigDecimal value = BigDecimal.TEN;
         validator.validate(balance,value);
@@ -28,7 +28,7 @@ public class TransactionValueValidatorTest {
 
     @Test
     void validateBalanceLessThanValue() {
-        TransactionValueValidator validator = new TransactionValueValidator();
+        TransferenceValueValidator validator = new TransferenceValueValidator();
         BigDecimal balance = BigDecimal.ONE;
         BigDecimal value = BigDecimal.TEN;
         assertThrows(OutOfBalanceException.class, () -> validator.validate(balance,value));

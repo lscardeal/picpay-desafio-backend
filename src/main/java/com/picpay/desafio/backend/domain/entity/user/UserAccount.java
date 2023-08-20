@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
+import com.picpay.desafio.backend.domain.entity.transaction.Transference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,7 +33,7 @@ public class UserAccount {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "USER_ID")
     @JsonIgnore
     private User user;
 
@@ -41,12 +41,17 @@ public class UserAccount {
     private BigDecimal balance;
 
     @OneToMany
-    @JoinColumn(name = "transaction_id", nullable = false)
-    private List<Transaction> transactions;
+    @JoinColumn(name = "TRANSFERENCE_ID", nullable = false)
+    private List<Transference> transferencesSended;
+
+    @OneToMany
+    @JoinColumn(name = "TRANSFERENCE_ID", nullable = false)
+    private List<Transference> transferencesReceived;
 
     public UserAccount(User user, BigDecimal balance) {
         this.user = user;
         this.balance = balance;
-        this.transactions = new ArrayList<Transaction>();
+        this.transferencesSended = new ArrayList<Transference>();
+        this.transferencesReceived = new ArrayList<Transference>();
     }
 }

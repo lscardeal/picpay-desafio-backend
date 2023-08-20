@@ -15,7 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
+import com.picpay.desafio.backend.domain.entity.transaction.Transference;
 import com.picpay.desafio.backend.domain.entity.user.User;
 import com.picpay.desafio.backend.domain.entity.user.UserAccount;
 import com.picpay.desafio.backend.repositories.UserAccountRepository;
@@ -34,19 +34,19 @@ public class UserAccountServiceTest {
     }
 
     @Test
-    void updateTransactionUserAccounts() {
+    void updateTransference() {
         UserAccount sender = new UserAccount(null, BigDecimal.TEN);
         sender.setId(1L);
         UserAccount receiver = new UserAccount(null, BigDecimal.ZERO);
         receiver.setId(2L);
-        Transaction transaction = new Transaction(sender, receiver, BigDecimal.TEN);
+        Transference transference = new Transference(sender, receiver, BigDecimal.TEN);
 
-        service.updateTransactionUserAccounts(transaction);
+        service.updateTransference(transference);
 
-        assertTrue(sender.getTransactions().contains(transaction));
+        assertTrue(sender.getTransferencesSended().contains(transference));
         assertEquals(BigDecimal.ZERO, sender.getBalance());
 
-        assertTrue(receiver.getTransactions().contains(transaction));
+        assertTrue(receiver.getTransferencesReceived().contains(transference));
         assertEquals(BigDecimal.TEN, receiver.getBalance());
 
         verify(repository).save(sender);
@@ -61,7 +61,8 @@ public class UserAccountServiceTest {
 
         assertEquals(BigDecimal.ZERO, userAccount.getBalance());
         assertEquals(user, userAccount.getUser());
-        assertTrue(userAccount.getTransactions().isEmpty());
+        assertTrue(userAccount.getTransferencesSended().isEmpty());
+        assertTrue(userAccount.getTransferencesReceived().isEmpty());
 
         verify(repository).save(any(UserAccount.class));
     }

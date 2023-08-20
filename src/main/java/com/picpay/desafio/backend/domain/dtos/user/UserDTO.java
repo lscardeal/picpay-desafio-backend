@@ -1,4 +1,4 @@
-package com.picpay.desafio.backend.domain.dtos;
+package com.picpay.desafio.backend.domain.dtos.user;
 
 import com.picpay.desafio.backend.domain.values.UserType;
 

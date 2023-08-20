@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.picpay.desafio.backend.domain.dtos.UserDTO;
+import com.picpay.desafio.backend.domain.dtos.user.UserDTO;
 import com.picpay.desafio.backend.domain.entity.user.User;
 import com.picpay.desafio.backend.services.UserService;
 

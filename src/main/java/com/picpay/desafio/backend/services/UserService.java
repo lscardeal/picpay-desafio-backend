@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.picpay.desafio.backend.domain.dtos.UserDTO;
+import com.picpay.desafio.backend.domain.dtos.user.UserDTO;
 import com.picpay.desafio.backend.domain.entity.user.User;
 import com.picpay.desafio.backend.domain.entity.user.UserAccount;
 import com.picpay.desafio.backend.exceptions.UserNotFoundException;
