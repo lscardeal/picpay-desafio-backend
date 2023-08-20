@@ -37,14 +37,7 @@ public class UserService {
     }
 
     private User assembleUser(final UserDTO userDTO) {
-        return User.builder()
-                .name(userDTO.name())
-                .surname(userDTO.surname())
-                .document(userDTO.document())
-                .email(userDTO.email())
-                .password(userDTO.password())
-                .userType(userDTO.userType())
-                .build();
+        return new User(userDTO.name(), userDTO.surname(), userDTO.document(), userDTO.email(), userDTO.password(), userDTO.userType());
     }
     
 }

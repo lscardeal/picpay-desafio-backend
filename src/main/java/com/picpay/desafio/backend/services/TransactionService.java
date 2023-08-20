@@ -1,13 +1,10 @@
 package com.picpay.desafio.backend.services;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.picpay.desafio.backend.domain.dtos.TransactionDTO;
 import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
-import com.picpay.desafio.backend.domain.entity.user.User;
 import com.picpay.desafio.backend.domain.entity.user.UserAccount;
 import com.picpay.desafio.backend.domain.values.TransactionAuthorization;
 import com.picpay.desafio.backend.exceptions.TransactionDeniedException;
@@ -58,11 +55,6 @@ public class TransactionService {
         UserAccount sender = userAccountService.getUserAccountById(transactionDTO.senderId());
         UserAccount receiver = userAccountService.getUserAccountById(transactionDTO.receiverId());;
 
-        return Transaction.builder()
-                        .senderAccount(sender)
-                        .receiverAccount(receiver)
-                        .value(transactionDTO.value())
-                        .timestamp(LocalDateTime.now())
-                        .build();
+        return new Transaction(sender, receiver, transactionDTO.value());
     }
 }

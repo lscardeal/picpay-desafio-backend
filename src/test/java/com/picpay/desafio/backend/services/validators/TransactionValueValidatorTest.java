@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 import com.picpay.desafio.backend.exceptions.OutOfBalanceException;
-import com.picpay.desafio.backend.exceptions.UnsupportedUserTypeExecption;
 
 public class TransactionValueValidatorTest {
 

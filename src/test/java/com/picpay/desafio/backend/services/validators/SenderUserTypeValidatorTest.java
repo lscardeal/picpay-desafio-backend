@@ -13,14 +13,16 @@ public class SenderUserTypeValidatorTest {
     @Test
     void validateRegularUser() {
         SenderUserTypeValidator validator = new SenderUserTypeValidator();
-        User user = User.builder().userType(UserType.REGULAR).build();
+        User user = new User();
+        user.setUserType(UserType.REGULAR);
         validator.validate(user);
     }
 
     @Test
     void validateMerchantUser() {
         SenderUserTypeValidator validator = new SenderUserTypeValidator();
-        User user = User.builder().userType(UserType.MERCHANT).build();
+        User user = new User();
+        user.setUserType(UserType.MERCHANT);
         assertThrows(UnsupportedUserTypeExecption.class, () -> validator.validate(user));
     }
     

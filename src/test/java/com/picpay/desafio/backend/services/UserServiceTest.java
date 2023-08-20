@@ -40,7 +40,8 @@ public class UserServiceTest {
     @Test
     void getUserById() {
         Long id = 1L;
-        User expectedUser = User.builder().id(id).build();
+        User expectedUser = new User();
+        expectedUser.setId(id);
 
         when(repository.findById(id)).thenReturn(Optional.of(expectedUser));
         User user = service.getUserById(id);
@@ -64,7 +65,7 @@ public class UserServiceTest {
         String email = "email";
         String password = "password";
         UserType userType = UserType.REGULAR;
-        UserAccount userAccount = UserAccount.builder().build();
+        UserAccount userAccount = new UserAccount();
 
         UserDTO dto = new UserDTO(name, surname, document, email, password, userType);
 

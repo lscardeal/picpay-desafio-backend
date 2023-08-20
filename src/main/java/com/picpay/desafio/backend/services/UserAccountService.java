@@ -1,7 +1,6 @@
 package com.picpay.desafio.backend.services;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,11 +43,7 @@ public class UserAccountService {
     }
 
     private UserAccount assembleUserAccount(final User user) {
-        return UserAccount.builder()
-                        .balance(BigDecimal.ZERO)
-                        .transactions(new ArrayList<Transaction>())
-                        .user(user)
-                        .build();
+        return new UserAccount(user, BigDecimal.ZERO);
     }
 
     public UserAccount getUserAccountById(final String stringfiedId) {

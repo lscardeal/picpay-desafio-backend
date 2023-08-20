@@ -11,18 +11,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "TRANSACTIONS")
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Transaction {
     
@@ -41,4 +39,11 @@ public class Transaction {
     private BigDecimal value;
 
     private LocalDateTime timestamp;
+
+    public Transaction(UserAccount senderAccount, UserAccount receiverAccount, BigDecimal value) {
+        this.senderAccount = senderAccount;
+        this.receiverAccount = receiverAccount;
+        this.value = value;
+        this.timestamp = LocalDateTime.now();
+    }
 }

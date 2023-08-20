@@ -29,9 +29,9 @@ public class TransactionValidatorTest {
 
     @Test
     void testValidate() {
-        Transaction transaction = Transaction.builder().build();
-        UserAccount userAccount = UserAccount.builder().build();
-        User user = User.builder().build();
+        Transaction transaction = new Transaction();
+        UserAccount userAccount = new UserAccount();
+        User user = new User();
 
         userAccount.setUser(user);
         transaction.setSenderAccount(userAccount);

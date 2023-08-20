@@ -1,14 +1,12 @@
 package com.picpay.desafio.backend.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -37,21 +35,11 @@ public class UserAccountServiceTest {
 
     @Test
     void updateTransactionUserAccounts() {
-        UserAccount sender = UserAccount.builder()
-            .id(1L)
-            .balance(BigDecimal.TEN)
-            .transactions(new ArrayList<Transaction>())
-            .build();
-        UserAccount receiver = UserAccount.builder()
-            .id(2L)
-            .balance(BigDecimal.ZERO)
-            .transactions(new ArrayList<Transaction>())
-            .build();
-        Transaction transaction = Transaction.builder()
-            .senderAccount(sender)
-            .receiverAccount(receiver)
-            .value(BigDecimal.TEN)
-            .build();
+        UserAccount sender = new UserAccount(null, BigDecimal.TEN);
+        sender.setId(1L);
+        UserAccount receiver = new UserAccount(null, BigDecimal.ZERO);
+        receiver.setId(2L);
+        Transaction transaction = new Transaction(sender, receiver, BigDecimal.TEN);
 
         service.updateTransactionUserAccounts(transaction);
 
@@ -67,7 +55,8 @@ public class UserAccountServiceTest {
     
     @Test
     void createUserAccount() {
-        User user = User.builder().id(1L).build();
+        User user = new User();
+        user.setId(1L);
         UserAccount userAccount = service.createUserAccount(user);
 
         assertEquals(BigDecimal.ZERO, userAccount.getBalance());
@@ -80,7 +69,8 @@ public class UserAccountServiceTest {
     @Test
     void getUserAccountById() {
         Long id = 1L;
-        UserAccount expectedUserAccount = UserAccount.builder().id(id).build();
+        UserAccount expectedUserAccount = new UserAccount();
+        expectedUserAccount.setId(id);
 
         when(repository.findById(id)).thenReturn(Optional.of(expectedUserAccount));
         UserAccount user = service.getUserAccountById(id);

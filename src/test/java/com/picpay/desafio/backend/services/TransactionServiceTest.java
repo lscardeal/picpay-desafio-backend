@@ -65,8 +65,10 @@ public class TransactionServiceTest {
         BigDecimal value = BigDecimal.TEN;
         TransactionDTO dto = new TransactionDTO(senderId, receiverId, value);
 
-        UserAccount sender = UserAccount.builder().id(senderId).build();
-        UserAccount receiver = UserAccount.builder().id(receiverId).build();
+        UserAccount sender = new UserAccount();
+        sender.setId(senderId);
+        UserAccount receiver = new UserAccount();
+        receiver.setId(receiverId);
         
         when(userAccountService.getUserAccountById(senderId)).thenReturn(sender);
         when(userAccountService.getUserAccountById(receiverId)).thenReturn(receiver);
