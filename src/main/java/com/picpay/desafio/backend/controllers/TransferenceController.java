@@ -19,7 +19,7 @@ public class TransferenceController {
     private TransferenceService service;
 
     public ResponseEntity<Transference> create(@RequestBody TransferenceDTO dto) {
-        Transference transference = service.createTransference(dto);
+        Transference transference = service.transfer(dto);
         return new ResponseEntity<Transference>(transference, HttpStatus.OK);
     }
     

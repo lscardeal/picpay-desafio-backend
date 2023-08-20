@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.picpay.desafio.backend.domain.entity.transaction.Deposit;
 import com.picpay.desafio.backend.domain.entity.transaction.Transference;
 import com.picpay.desafio.backend.domain.entity.user.User;
 import com.picpay.desafio.backend.domain.entity.user.UserAccount;
@@ -18,22 +19,29 @@ public class UserAccountService {
     private UserAccountRepository userAccountRepository;
 
     public void updateTransference(final Transference transference) {
-        this.updateSenderAccount(transference);
-        this.updateReceiverAccount(transference);
+        this.updateTransferenceSenderAccount(transference);
+        this.updateTransferenceReceiverAccount(transference);
     }
 
-    private void updateSenderAccount(final Transference transference) {
+    private void updateTransferenceSenderAccount(final Transference transference) {
         UserAccount senderAccount = transference.getSenderAccount();
         senderAccount.getTransferencesSended().add(transference);
         senderAccount.setBalance(senderAccount.getBalance().subtract(transference.getValue()));
         userAccountRepository.save(senderAccount);
     }
 
-    private void updateReceiverAccount(final Transference transference) {
+    private void updateTransferenceReceiverAccount(final Transference transference) {
         UserAccount receiverAccount = transference.getReceiverAccount();
         receiverAccount.getTransferencesReceived().add(transference);
         receiverAccount.setBalance(receiverAccount.getBalance().add(transference.getValue()));
         userAccountRepository.save(receiverAccount);
+    }
+
+    public void updateDeposit(Deposit deposit) {
+        UserAccount receiver = deposit.getReceiverAccount();
+        receiver.getDepositsReceived().add(deposit);
+        receiver.setBalance(receiver.getBalance().add(deposit.getValue()));
+        userAccountRepository.save(receiver);
     }
 
     public UserAccount createUserAccount(final User user) {

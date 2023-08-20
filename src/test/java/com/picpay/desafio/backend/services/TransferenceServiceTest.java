@@ -63,7 +63,7 @@ public class TransferenceServiceTest {
         when(userAccountService.getUserAccountById(receiverId)).thenReturn(receiver);
         when(authorizerGateway.getAuthorization()).thenReturn(TransferenceAuthorization.DENIED);
 
-        assertThrows(TransferenceDeniedException.class, () -> service.createTransference(dto));
+        assertThrows(TransferenceDeniedException.class, () -> service.transfer(dto));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class TransferenceServiceTest {
         when(userAccountService.getUserAccountById(receiverId)).thenReturn(receiver);
         when(authorizerGateway.getAuthorization()).thenReturn(TransferenceAuthorization.AUTHORIZED);
 
-        Transference transference = service.createTransference(dto);
+        Transference transference = service.transfer(dto);
 
         assertEquals(sender, transference.getSenderAccount());
         assertEquals(receiver, transference.getReceiverAccount());

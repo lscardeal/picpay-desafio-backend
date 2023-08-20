@@ -27,7 +27,7 @@ public class TransferenceService {
     @Autowired
     private TransferenceAuthorizerGateway authorizerGateway;
 
-    public Transference createTransference(final TransferenceDTO transferenceDTO) {
+    public Transference transfer(final TransferenceDTO transferenceDTO) {
         Transference transference = this.assembleTransference(transferenceDTO);
         this.transferenceValidator.validate(transference);
 
