@@ -67,7 +67,7 @@ public class TransferenceServiceTest {
     }
 
     @Test
-    void createTransference() {
+    void transfer() {
         Long senderId = 1L;
         Long receiverId = 2L;
         BigDecimal value = BigDecimal.TEN;
