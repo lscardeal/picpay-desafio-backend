@@ -53,9 +53,21 @@ public class TransactionServiceTest {
 
     @Test
     void checkAuthorizationError() {
-        TransactionAuthorization auth = TransactionAuthorization.DENIED;
-        when(authorizerGateway.getAuthorization()).thenReturn(auth);
-        assertThrows(TransactionDeniedException.class, () -> service.checkAuthorization());
+        Long senderId = 1L;
+        Long receiverId = 2L;
+        BigDecimal value = BigDecimal.TEN;
+        TransactionDTO dto = new TransactionDTO(senderId, receiverId, value);
+
+        UserAccount sender = new UserAccount();
+        sender.setId(senderId);
+        UserAccount receiver = new UserAccount();
+        receiver.setId(receiverId);
+
+        when(userAccountService.getUserAccountById(senderId)).thenReturn(sender);
+        when(userAccountService.getUserAccountById(receiverId)).thenReturn(receiver);
+        when(authorizerGateway.getAuthorization()).thenReturn(TransactionAuthorization.DENIED);
+
+        assertThrows(TransactionDeniedException.class, () -> service.createTransaction(dto));
     }
 
     @Test

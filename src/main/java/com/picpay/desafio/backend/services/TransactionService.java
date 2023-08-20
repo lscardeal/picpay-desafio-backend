@@ -44,7 +44,7 @@ public class TransactionService {
         return transaction;
     }
 
-    public void checkAuthorization() throws TransactionDeniedException {
+    private void checkAuthorization() throws TransactionDeniedException {
         TransactionAuthorization authorization = this.authorizerGateway.getAuthorization();
 
         if (authorization.isDenied())
