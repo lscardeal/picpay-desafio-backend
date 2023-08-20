@@ -1,5 +1,7 @@
 package com.picpay.desafio.backend.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,10 @@ public class UserService {
 
     public User getUserById(final Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     public User createUser(final UserDTO userDTO) {

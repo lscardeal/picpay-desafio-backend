@@ -6,6 +6,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -55,6 +57,26 @@ public class UserServiceTest {
         when(repository.findById(id)).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundException.class, () -> service.getUserById(id));
+    }
+
+    @Test
+    void getAllUsers() {
+        Long id = 1L;
+        User expectedUser = new User();
+        expectedUser.setId(id);
+
+        Long anotherId = 2L;
+        User anotherExpectedUser = new User();
+        anotherExpectedUser.setId(anotherId);
+
+        List<User> allExpectedUsers = new ArrayList<User>();
+        allExpectedUsers.add(expectedUser);
+        allExpectedUsers.add(anotherExpectedUser);
+
+        when(repository.findAll()).thenReturn(allExpectedUsers);
+        List<User> users = service.getAllUsers();
+
+        assertEquals(allExpectedUsers, users);
     }
 
     @Test
