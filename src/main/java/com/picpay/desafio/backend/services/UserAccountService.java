@@ -38,7 +38,6 @@ public class UserAccountService {
 
     public UserAccount createUserAccount(final User user) {
         UserAccount userAccount = this.assembleUserAccount(user);
-        userAccountRepository.save(userAccount);
         return userAccount;
     }
 

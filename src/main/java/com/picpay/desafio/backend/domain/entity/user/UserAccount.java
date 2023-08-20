@@ -2,7 +2,9 @@ package com.picpay.desafio.backend.domain.entity.user;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.picpay.desafio.backend.domain.entity.transaction.Transaction;
 
 import jakarta.persistence.Column;
@@ -31,7 +33,8 @@ public class UserAccount {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @Column(nullable = false)
@@ -39,7 +42,7 @@ public class UserAccount {
 
     @OneToMany
     @JoinColumn(name = "transaction_id", nullable = false)
-    private ArrayList<Transaction> transactions;
+    private List<Transaction> transactions;
 
     public UserAccount(User user, BigDecimal balance) {
         this.user = user;
