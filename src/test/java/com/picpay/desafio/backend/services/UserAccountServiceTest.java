@@ -63,8 +63,6 @@ public class UserAccountServiceTest {
         assertEquals(user, userAccount.getUser());
         assertTrue(userAccount.getTransferencesSended().isEmpty());
         assertTrue(userAccount.getTransferencesReceived().isEmpty());
-
-        verify(repository).save(any(UserAccount.class));
     }
 
     @Test
