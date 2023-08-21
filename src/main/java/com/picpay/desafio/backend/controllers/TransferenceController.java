@@ -3,6 +3,7 @@ package com.picpay.desafio.backend.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ public class TransferenceController {
     @Autowired
     private TransferenceService service;
 
+    @PostMapping("/transfer")
     public ResponseEntity<Transference> create(@RequestBody final TransferenceDTO dto) {
         Transference transference = service.transfer(dto);
         return new ResponseEntity<Transference>(transference, HttpStatus.OK);

@@ -3,6 +3,7 @@ package com.picpay.desafio.backend.domain.entity.transaction;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.picpay.desafio.backend.domain.entity.user.UserAccount;
 
 import jakarta.persistence.Column;
@@ -31,10 +32,12 @@ public class Transference {
 
     @ManyToOne
     @JoinColumn(name = "SENDER_ID", nullable = false)
+    @JsonBackReference
     private UserAccount senderAccount;
 
     @ManyToOne
     @JoinColumn(name = "RECEIVER_ID", nullable = false)
+    @JsonBackReference
     private UserAccount receiverAccount;
 
     @Column(name = "TRANSFERENCE_VALUE", nullable = false)

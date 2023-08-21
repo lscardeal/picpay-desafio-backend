@@ -2,6 +2,8 @@ package com.picpay.desafio.backend.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -16,8 +18,12 @@ import org.mockito.MockitoAnnotations;
 import com.picpay.desafio.backend.domain.dtos.transaction.DepositDTO;
 import com.picpay.desafio.backend.domain.entity.transaction.Deposit;
 import com.picpay.desafio.backend.domain.entity.user.UserAccount;
+import com.picpay.desafio.backend.repositories.DepositRepository;
 
 public class DepositServiceTest {
+
+    @Mock
+    private DepositRepository depositRepository;
 
     @Mock
     private UserAccountService userAccountService;
@@ -46,6 +52,8 @@ public class DepositServiceTest {
         assertEquals(receiver, deposit.getReceiverAccount());
         assertEquals(value, deposit.getValue());
         assertTrue(deposit.getTimestamp() instanceof LocalDateTime);
+
+        verify(depositRepository).save(any(Deposit.class));
     }
     
 }

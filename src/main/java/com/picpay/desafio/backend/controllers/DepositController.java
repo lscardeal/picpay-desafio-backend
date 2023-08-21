@@ -19,7 +19,7 @@ public class DepositController {
     @Autowired
     private DepositService depositService;
     
-    @PostMapping
+    @PostMapping("/deposit")
     public ResponseEntity<Deposit> deposit(@RequestBody final DepositDTO depositDTO) {
         Deposit deposit = depositService.deposit(depositDTO);
         return new ResponseEntity<Deposit>(deposit, HttpStatus.OK);

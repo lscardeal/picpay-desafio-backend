@@ -6,15 +6,20 @@ import org.springframework.stereotype.Service;
 import com.picpay.desafio.backend.domain.dtos.transaction.DepositDTO;
 import com.picpay.desafio.backend.domain.entity.transaction.Deposit;
 import com.picpay.desafio.backend.domain.entity.user.UserAccount;
+import com.picpay.desafio.backend.repositories.DepositRepository;
 
 @Service
 public class DepositService {
+
+    @Autowired
+    private DepositRepository depositRepository;
 
     @Autowired
     private UserAccountService userAccountService;
     
     public Deposit deposit(final DepositDTO depositDTO) {
         Deposit deposit = assembleDeposit(depositDTO);
+        depositRepository.save(deposit);
         userAccountService.updateDeposit(deposit);
         return deposit;
     }
